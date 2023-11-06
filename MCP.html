@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Online Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+        }
+        .container {
+            max-width: 400px;
+            margin: 0 auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
+        }
+        label {
+            font-weight: bold;
+        }
+        input[type="text"] {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 10px;
+            border: 1px solid #ccc;
+            border-radius: 3px;
+        }
+        .payment-option {
+            display: flex;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .payment-option input[type="radio"] {
+            margin-right: 10px;
+        }
+        button {
+            background-color: #007bff;
+            color: #fff;
+            border: none;
+            border-radius: 3px;
+            padding: 10px 20px;
+            cursor: pointer;
+            display: block;
+            margin: 0 auto;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Online Payment</h1>
+        <form id="paymentForm" action="/MCP" method="post">
+            <label for="merchantCode">Enter Merchant Code:</label>
+            <input type="text" id="merchantCode" name="merchantCode" required>
+            <label for="orderNumber">Enter Order Number:</label>
+            <input type="text" id="orderNumber" name="orderNumber" required>
+            
+            <h2>Select Payment Method</h2>
+            <div class="payment-option">
+                <input type="radio" id="mtnMoney" name="paymentMethod" value="mtnMoney">
+                <label for="mtnMoney">MTN Mobile Money</label>
+            </div>
+            <div class="payment-option">
+                <input type="radio" id="airtelMoney" name="paymentMethod" value="airtelMoney">
+                <label for="airtelMoney">Airtel Money</label>
+            </div>
+            
+            <button type="submit">Submit Payment</button>
+        </form>
+    </div>
+
+    <script>
+        document.getElementById('paymentForm').addEventListener('submit', function (e) {
+            e.preventDefault();
+            const merchantCode = document.getElementById('merchantCode').value;
+            const orderNumber = document.getElementById('orderNumber').value;
+            const selectedPaymentMethod = document.querySelector('input[name="paymentMethod"]:checked');
+    
+            if (selectedPaymentMethod) {
+                const paymentMethod = selectedPaymentMethod.value;
+                // You can remove the alert and proceed to submit the form
+                // alert(`Merchant Code: ${merchantCode}\nOrder Number: ${orderNumber}\nSelected Payment Method: ${paymentMethod}`);
+                document.getElementById('paymentForm').submit();
+            } else {
+                alert('Please select a payment method.');
+            }
+        });
+    </script>
+    
+</body>
+</html>
